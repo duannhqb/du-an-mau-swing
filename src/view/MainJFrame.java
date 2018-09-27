@@ -552,7 +552,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
         // TODO add your handling code here:
-        this.logOff();
+        if (DialogHelper.confirm(this, "Bạn thực sự muốn kết thúc chương trình?")) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnKetThucActionPerformed
 
     private void btnChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChuyenDeActionPerformed

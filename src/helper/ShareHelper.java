@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import model.NhanVien;
 
 /**
@@ -97,6 +98,10 @@ public class ShareHelper {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         tblGridView.setDefaultRenderer(Object.class, centerRenderer);
+
+        TableCellRenderer rendererFromHeader = tblGridView.getTableHeader().getDefaultRenderer();
+        JLabel headerLabel = (JLabel) rendererFromHeader;
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
     }
 
     public static void setInfinity(JLabel label, String text) {
@@ -123,7 +128,7 @@ public class ShareHelper {
         } catch (Exception e) {
         }
     }
-    
+
 //    format point
     public static NumberFormat FORMATTER = new DecimalFormat("#0.00");
 }

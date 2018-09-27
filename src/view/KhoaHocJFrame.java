@@ -7,7 +7,6 @@ package view;
 
 import DAO.ChuyenDeDAO;
 import DAO.KhoaHocDAO;
-import DAO.NhanVienDAO;
 import helper.DialogHelper;
 import helper.ShareHelper;
 import helper.XDate;
@@ -18,7 +17,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.ChuyenDe;
 import model.KhoaHoc;
-import model.NhanVien;
 
 /**
  *
@@ -39,6 +37,7 @@ public class KhoaHocJFrame extends javax.swing.JFrame {
     public KhoaHocJFrame() {
         initComponents();
         init();
+        tabs.setSelectedIndex(1);
     }
 
     void init() {

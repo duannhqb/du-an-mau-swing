@@ -22,23 +22,18 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NguoiHocJFrame
      */
-    DefaultTableModel model;
-    String header[] = {"MÃ NH", "HỌ VÀ TÊN", "GIỚI TÍNH", "NGÀY SINH", "ĐIỆN THOẠI", "EMAIL", "MÃ NV", "NGÀY ĐK"};
-
     int index = 0;
     NguoiHocDAO dao = new NguoiHocDAO();
 
     public NguoiHocJFrame() {
         initComponents();
         init();
+        tabs.setSelectedIndex(1);
     }
 
     void init() {
         setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
-
-        model = (DefaultTableModel) tblGridView.getModel();
-        model.setColumnIdentifiers(header);
         tblGridView.setDefaultEditor(Object.class, null);
         ShareHelper.DrawTable(tblGridView);
 
@@ -52,7 +47,6 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
         try {
             String keyword = txtTimKiem.getText();
             List<NguoiHoc> list = dao.selectByKeyword(keyword);
-
             for (NguoiHoc nh : list) {
                 Object[] row = {
                     nh.getMaNH(),
@@ -396,7 +390,7 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
                 .addComponent(lblGhiChu)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
                 .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnInsert)
                     .addComponent(btnUpdate)
@@ -437,9 +431,9 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
         pnlTimKiemLayout.setHorizontalGroup(
             pnlTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTimKiemLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnTimKiem)
                 .addContainerGap())
         );
@@ -460,7 +454,7 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-
+                "MÃ NH", "HỌ VÀ TÊN", "GIỚI TÍNH", "NGÀY SINH", "ĐIỆN THOẠI", "EMAIL", "MÃ NV", "NGÀY ĐK"
             }
         ));
         tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -469,6 +463,17 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tblGridView);
+        if (tblGridView.getColumnModel().getColumnCount() > 0) {
+            tblGridView.getColumnModel().getColumn(0).setMinWidth(80);
+            tblGridView.getColumnModel().getColumn(0).setPreferredWidth(80);
+            tblGridView.getColumnModel().getColumn(0).setMaxWidth(80);
+            tblGridView.getColumnModel().getColumn(1).setMinWidth(130);
+            tblGridView.getColumnModel().getColumn(1).setPreferredWidth(130);
+            tblGridView.getColumnModel().getColumn(1).setMaxWidth(130);
+            tblGridView.getColumnModel().getColumn(2).setMinWidth(70);
+            tblGridView.getColumnModel().getColumn(2).setPreferredWidth(70);
+            tblGridView.getColumnModel().getColumn(2).setMaxWidth(70);
+        }
 
         javax.swing.GroupLayout pnlListLayout = new javax.swing.GroupLayout(pnlList);
         pnlList.setLayout(pnlListLayout);
@@ -476,14 +481,11 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
                     .addComponent(lblTimKiem)
-                    .addComponent(pnlTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
-            .addGroup(pnlListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                    .addComponent(pnlTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pnlListLayout.setVerticalGroup(
             pnlListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,8 +495,8 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         tabs.addTab("Danh sách", pnlList);
@@ -514,8 +516,8 @@ public class NguoiHocJFrame extends javax.swing.JFrame {
             .addGroup(pnlWapperLayout.createSequentialGroup()
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
