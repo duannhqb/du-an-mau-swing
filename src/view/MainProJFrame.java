@@ -44,7 +44,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jPanel4.setBackground(new java.awt.Color(170, 169, 169));
+        jPanel4.setBackground(new java.awt.Color(51, 153, 255));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -57,9 +57,9 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addGap(0, 152, Short.MAX_VALUE)
         );
 
-        jPanel5.setBackground(new java.awt.Color(170, 169, 169));
+        jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 
-        jPanel6.setBackground(new java.awt.Color(134, 130, 130));
+        jPanel6.setBackground(new java.awt.Color(102, 176, 249));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -72,7 +72,7 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addGap(0, 52, Short.MAX_VALUE)
         );
 
-        jPanel7.setBackground(new java.awt.Color(134, 130, 130));
+        jPanel7.setBackground(new java.awt.Color(102, 176, 249));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -85,7 +85,7 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addGap(0, 52, Short.MAX_VALUE)
         );
 
-        jPanel8.setBackground(new java.awt.Color(134, 130, 130));
+        jPanel8.setBackground(new java.awt.Color(102, 176, 249));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -98,7 +98,7 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addGap(0, 52, Short.MAX_VALUE)
         );
 
-        jPanel9.setBackground(new java.awt.Color(134, 130, 130));
+        jPanel9.setBackground(new java.awt.Color(102, 176, 249));
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -111,7 +111,7 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addGap(0, 52, Short.MAX_VALUE)
         );
 
-        jPanel10.setBackground(new java.awt.Color(134, 130, 130));
+        jPanel10.setBackground(new java.awt.Color(102, 176, 249));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -124,7 +124,7 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addGap(0, 52, Short.MAX_VALUE)
         );
 
-        jPanel11.setBackground(new java.awt.Color(134, 130, 130));
+        jPanel11.setBackground(new java.awt.Color(102, 176, 249));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
