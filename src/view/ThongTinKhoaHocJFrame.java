@@ -36,12 +36,14 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
         initComponents();
         init();
         this.clear();
+        lblMSG.setVisible(false);
     }
 
     public ThongTinKhoaHocJFrame(int index) {
         initComponents();
         this.index = index;
         init();
+        lblMSG.setVisible(false);
     }
 
     void init() {

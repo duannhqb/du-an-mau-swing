@@ -16,8 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -48,6 +46,7 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
             this.clear();
         } catch (IOException ex) {
         }
+        lblMSG.setVisible(false);
     }
 
     public ThongTinChuyenDeJFrame(int index) {
@@ -55,6 +54,7 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
         this.index = index;
         init();
         this.fillToForm();
+        lblMSG.setVisible(false);
     }
 
     void init() {

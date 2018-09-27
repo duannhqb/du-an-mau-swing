@@ -183,7 +183,7 @@ public class BangChuyenDeJFrame extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlWapperLayout.createSequentialGroup()
-                        .addGap(154, 154, 154)
+                        .addGap(158, 158, 158)
                         .addComponent(pnlFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
