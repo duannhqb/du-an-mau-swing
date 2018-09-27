@@ -33,7 +33,6 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
      * Creates new form ThongTinChuyenDeJFrame
      */
     DefaultTableModel model;
-//    String header[] = {"MÃ CD", "TÊN CD", "HỌC PHÍ", "THỜI LƯỢNG", "HÌNH"};
     JFileChooser fileChooser = new JFileChooser(ShareHelper.PATH_IMAGE);
     int index = 0;
     ChuyenDeDAO dao = new ChuyenDeDAO();

@@ -25,7 +25,6 @@ public class NhanVienJFrame extends javax.swing.JFrame {
     DefaultTableModel model;
     String header[] = {"MÃ NV", "MẬT KHẨU", "HỌ VÀ TÊN", "VAI TRÒ"};
 
-//    vị trí của nhân viên đang hiển thị trên form
     int index = 0;
     NhanVienDAO dao = new NhanVienDAO();
 
@@ -50,6 +49,7 @@ public class NhanVienJFrame extends javax.swing.JFrame {
         this.load();
         this.setStatus(true);
         this.clear();
+        lblMSG.setVisible(false);
     }
 
     void load() {

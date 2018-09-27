@@ -18,7 +18,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import model.ChuyenDe;
 
@@ -55,12 +54,12 @@ public class ChuyenDeJFrame extends javax.swing.JFrame {
         this.load();
         this.setStatus(true);
         tabs.setSelectedIndex(1);
+        lblMSG.setVisible(false);
     }
 
     void clear() throws IOException {
         this.setModel(new ChuyenDe());
         this.setStatus(true);
-//        
         lblHinh.setToolTipText("");
         lblHinh.setIcon(ShareHelper.readLogo(""));
         txtThoiLuong.setText("");
@@ -145,7 +144,6 @@ public class ChuyenDeJFrame extends javax.swing.JFrame {
             dao.insert(model);
             this.load();
             this.clear();
-//            DialogHelper.alert(this, "Thêm mới thành công!");
             ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
         } catch (Exception e) {
             DialogHelper.alert(this, "Thêm mới thất bại!");
