@@ -22,8 +22,6 @@ public class ChaoJDialog extends java.awt.Dialog implements Runnable {
     public ChaoJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-//        Thread Clock = new Thread(this);
-//        Clock.start();
         init();
     }
 
