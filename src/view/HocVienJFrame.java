@@ -390,9 +390,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
             .addGroup(pnlWapperLayout.createSequentialGroup()
                 .addGroup(pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlWapperLayout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(lblMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlWapperLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(pnlHVKhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlWapperLayout.createSequentialGroup()
@@ -401,8 +398,13 @@ public class HocVienJFrame extends javax.swing.JFrame {
                 .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlWapperLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblTitleHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111))
+                .addGroup(pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlWapperLayout.createSequentialGroup()
+                        .addComponent(lblTitleHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlWapperLayout.createSequentialGroup()
+                        .addComponent(lblMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170))))
         );
         pnlWapperLayout.setVerticalGroup(
             pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,9 +413,9 @@ public class HocVienJFrame extends javax.swing.JFrame {
                 .addComponent(lblTitleHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlHVKhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -462,6 +464,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
     private void mniThemHVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThemHVActionPerformed
         // TODO add your handling code here:
         pnlHVKhac.setVisible(true);
+        lblMSG.setVisible(false);
     }//GEN-LAST:event_mniThemHVActionPerformed
 
     private void pnlWapperMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlWapperMouseReleased
@@ -474,6 +477,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
     private void mniAnThanhThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAnThanhThemActionPerformed
         // TODO add your handling code here:
         pnlHVKhac.setVisible(false);
+        lblMSG.setVisible(true);
     }//GEN-LAST:event_mniAnThanhThemActionPerformed
 
     /**

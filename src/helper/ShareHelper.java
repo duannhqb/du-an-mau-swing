@@ -110,7 +110,7 @@ public class ShareHelper {
         label.setFont(new Font("SansSerif", Font.BOLD, 13));
         label.setText(text);
 
-        new Timer(4000, new ActionListener() {
+        new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 label.setText("");

@@ -31,7 +31,7 @@ public class DangNhapJDialog extends java.awt.Dialog {
         setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
 
-        txtUserName.setText("nv001");
+        txtUserName.setText("DiuNT");
         txtPassword.setText("123456");
     }
 
