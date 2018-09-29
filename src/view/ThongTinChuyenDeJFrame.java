@@ -21,7 +21,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import model.ChuyenDe;
-import static view.BangChuyenDeJFrame.tblGridView;
 
 /**
  *
@@ -73,7 +72,8 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
     }
 
     void load() {
-        model = (DefaultTableModel) tblGridView.getModel();
+//        model = (DefaultTableModel) tblGridView.getModel();
+        model = (DefaultTableModel) MainProJFrame.tblChuyenDe.getModel();
         model.setRowCount(0);
         try {
             List<ChuyenDe> list = dao.select();
@@ -125,7 +125,9 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
         btnDelete.setEnabled(!insertTable);
 
         boolean first = this.index > 0;
-        boolean last = this.index < tblGridView.getRowCount() - 1;
+//        boolean last = this.index < tblGridView.getRowCount() - 1;
+        boolean last = this.index < MainProJFrame.tblChuyenDe.getRowCount() - 1;
+
         btnFirst.setEnabled(!insertTable && first);
         btnPrev.setEnabled(!insertTable && first);
         btnNext.setEnabled(!insertTable && last);
@@ -134,7 +136,7 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
 
     void fillToForm() {
         try {
-            String maCD = (String) tblGridView.getValueAt(this.index, 0);
+            String maCD = (String) MainProJFrame.tblChuyenDe.getValueAt(this.index, 0);
             ChuyenDe model = dao.findById(maCD);
             if (model != null) {
                 this.setModel(model);
@@ -586,7 +588,7 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-        this.index = tblGridView.getRowCount() - 1;
+        this.index = MainProJFrame.tblChuyenDe.getRowCount() - 1;
         this.fillToForm();
     }//GEN-LAST:event_btnLastActionPerformed
 

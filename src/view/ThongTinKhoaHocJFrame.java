@@ -17,7 +17,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import model.ChuyenDe;
 import model.KhoaHoc;
-import static view.BangKhoaHoc.tblGridView;
 
 /**
  *
@@ -28,14 +27,13 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
     /**
      * Creates new form ThongTinKhoaHocJFrame
      */
-    int index = 0;
+    int index;
     KhoaHocDAO dao = new KhoaHocDAO();
     ChuyenDeDAO cddao = new ChuyenDeDAO();
 
     public ThongTinKhoaHocJFrame() {
         initComponents();
         init();
-        this.clear();
         lblMSG.setVisible(false);
     }
 
@@ -43,24 +41,24 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
         initComponents();
         this.index = index;
         init();
-        lblMSG.setVisible(false);
     }
 
     void init() {
         setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
+        lblMSG.setVisible(false);
         this.fillComboBox();
+        this.selectComboBox();
         this.setStatus(true);
         txtNguoiTao.setEditable(false);
         txtHocPhi.setEditable(false);
         txtThoiLuong.setEditable(false);
         txtNgayTao.setEditable(false);
-        this.selectComboBox();
         this.fillToForm();
     }
 
     void load() {
-        DefaultTableModel model = (DefaultTableModel) tblGridView.getModel();
+        DefaultTableModel model = (DefaultTableModel) MainProJFrame.tblKhoaHoc.getModel();
         model.setRowCount(0);
         try {
             List<KhoaHoc> list = dao.select();
@@ -114,7 +112,7 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
         btnDelete.setEnabled(!insertTable);
 
         boolean first = this.index > 0;
-        boolean last = this.index < tblGridView.getRowCount() - 1;
+        boolean last = this.index < MainProJFrame.tblKhoaHoc.getRowCount() - 1;
         btnFirst.setEnabled(!insertTable && first);
         btnPrev.setEnabled(!insertTable && first);
         btnNext.setEnabled(!insertTable && last);
@@ -139,7 +137,6 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
         if (model != null) {
             model.removeAllElements();
         }
-
         try {
             List<ChuyenDe> list = cddao.select();
             for (ChuyenDe chuyenDe : list) {
@@ -152,7 +149,7 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
 
     void fillToForm() {
         try {
-            Integer maKH = (Integer) tblGridView.getValueAt(this.index, 0);
+            Integer maKH = (Integer) MainProJFrame.tblKhoaHoc.getValueAt(this.index, 0);
             KhoaHoc model = dao.findById(maKH);
             if (model != null) {
                 this.setModel(model);
@@ -174,7 +171,9 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
         model.setNgayTao(XDate.now());
         this.setModel(model);
 
-        setStatus(true);
+        this.setStatus(true);
+        this.selectComboBox();
+        this.cboChuyenDe.setSelectedIndex(0);
     }
 
     void insert() {
@@ -640,7 +639,7 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-        this.index = tblGridView.getRowCount() - 1;
+        this.index = MainProJFrame.tblKhoaHoc.getRowCount() - 1;
         this.fillToForm();
     }//GEN-LAST:event_btnLastActionPerformed
 
