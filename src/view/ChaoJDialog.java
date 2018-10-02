@@ -77,23 +77,23 @@ public class ChaoJDialog extends java.awt.Dialog implements Runnable {
         pnlMain.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.orange));
         pnlMain.setPreferredSize(new java.awt.Dimension(510, 333));
 
-        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Pacman-1.5s-200px.gif"))); // NOI18N
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Ellipsis-1s-200px (1).gif"))); // NOI18N
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(77, 77, 77)
+                .addComponent(lblIcon)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(35, 35, 35)
                 .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

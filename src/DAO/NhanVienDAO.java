@@ -83,6 +83,11 @@ public class NhanVienDAO {
         return select(sql);
     }
 
+    public List<NhanVien> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM NhanVien WHERE HoTen LIKE ?";
+        return select(sql, "%" + keyword + "%");
+    }
+    
     public NhanVien findById(String maNV) {
         String sql = "SELECT * FROM NhanVien WHERE MaNV=?";
         List<NhanVien> list = select(sql, maNV);
