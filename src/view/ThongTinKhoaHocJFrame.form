@@ -133,14 +133,12 @@
                       <Component id="btnPrev" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnNext" alignment="0" max="32767" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="btnStudent" alignment="3" max="32767" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                              <Component id="btnClear" alignment="3" max="32767" attributes="0"/>
-                              <Component id="btnDelete" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="btnUpdate" alignment="3" max="32767" attributes="0"/>
-                              <Component id="btnInsert" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnClear" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btnDelete" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="btnUpdate" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btnInsert" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="btnStudent" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLast" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="21" max="32767" attributes="0"/>

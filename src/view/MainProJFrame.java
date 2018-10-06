@@ -23,8 +23,6 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -78,10 +76,8 @@ public class MainProJFrame extends javax.swing.JFrame {
 //        chào
         lblChao.setText("Chào: " + ShareHelper.USER.getHoTen());
         this.cardLayout(pnlTrangChu, pnlHome);
-
-        this.playMusic();
         this.popMenu();
-
+        
         ShareHelper.DrawTable(tblThongKeNguoiHoc);
         ShareHelper.DrawTable(tblBangDiem);
         ShareHelper.DrawTable(tblTongHop);
@@ -99,9 +95,6 @@ public class MainProJFrame extends javax.swing.JFrame {
         mniNhanVien.setText("Nhân viên");
         mniThongKe.setText("Thống kê");
         mniTrangChu.setText("Trang chủ");
-    }
-
-    private void playMusic() {
     }
 
     private void openLogin() {
@@ -177,7 +170,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         scp.setBorder(null);
     }
 
-//   TAB chuyên đề
+//********************* TAB chuyên đề *********************
     void loadChuyenDe() {
         DefaultTableModel model = (DefaultTableModel) tblChuyenDe.getModel();
         model.setRowCount(0);
@@ -199,7 +192,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         }
     }
 
-//    TAB người học
+//********************* TAB người học *********************
     void loadNguoiHoc() {
         DefaultTableModel model = (DefaultTableModel) tblNguoiHoc.getModel();
         model.setRowCount(0);
@@ -224,7 +217,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         }
     }
 
-//    TAB nhân viên
+//********************* TAB nhân viên *********************
     void loadNhanVien() {
         DefaultTableModel model = (DefaultTableModel) tblNhanVien.getModel();
         model.setRowCount(0);
@@ -245,7 +238,8 @@ public class MainProJFrame extends javax.swing.JFrame {
         }
     }
 
-//    TAB khóa học
+// ******************* TAB khóa học *********************
+
     void loadKhoaHoc() {
         DefaultTableModel model = (DefaultTableModel) tblKhoaHoc.getModel();
         model.setRowCount(0);
@@ -269,7 +263,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         }
     }
 
-// TAB tổng hợp    
+// ******************* TAB tổng hợp *********************
 //    combobox khoa hoc
     void fillComboBoxKhoaHoc() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhoaHoc.getModel();
@@ -344,7 +338,6 @@ public class MainProJFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-
     
 //    bảng doanh thu
 //    với quyền truy cập là Trưởng phòng mới xem được doanh thu
@@ -406,6 +399,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         btnNhanVien = new javax.swing.JButton();
         pnlThongKe = new javax.swing.JPanel();
         btnThongKe = new javax.swing.JButton();
+        btnAbout = new javax.swing.JButton();
         tabs = new javax.swing.JPanel();
         pnlTrangChu = new javax.swing.JPanel();
         lblMain = new javax.swing.JLabel();
@@ -470,7 +464,6 @@ public class MainProJFrame extends javax.swing.JFrame {
         lblDongHo = new javax.swing.JLabel();
         pnlTrangThaiBottom = new javax.swing.JPanel();
         btnOpenBr = new javax.swing.JButton();
-        btnAbout = new javax.swing.JButton();
 
         mniTrangChu.setText("jMenuItem1");
         mniTrangChu.addActionListener(new java.awt.event.ActionListener() {
@@ -768,6 +761,19 @@ public class MainProJFrame extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
+        btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Info.png"))); // NOI18N
+        btnAbout.setText("Thông tin ứng dụng");
+        btnAbout.setBorderPainted(false);
+        btnAbout.setContentAreaFilled(false);
+        btnAbout.setDefaultCapable(false);
+        btnAbout.setFocusPainted(false);
+        btnAbout.setFocusable(false);
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAboutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDieuHuongLayout = new javax.swing.GroupLayout(pnlDieuHuong);
         pnlDieuHuong.setLayout(pnlDieuHuongLayout);
         pnlDieuHuongLayout.setHorizontalGroup(
@@ -778,6 +784,9 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addComponent(pnlNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlNguoiHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlDieuHuongLayout.createSequentialGroup()
+                .addComponent(btnAbout)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlDieuHuongLayout.setVerticalGroup(
             pnlDieuHuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -794,7 +803,8 @@ public class MainProJFrame extends javax.swing.JFrame {
                 .addComponent(pnlNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout pnlThanhDieuHuongLayout = new javax.swing.GroupLayout(pnlThanhDieuHuong);
@@ -1605,6 +1615,8 @@ public class MainProJFrame extends javax.swing.JFrame {
         btnExit.setBorderPainted(false);
         btnExit.setContentAreaFilled(false);
         btnExit.setDefaultCapable(false);
+        btnExit.setFocusPainted(false);
+        btnExit.setFocusable(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -1642,20 +1654,11 @@ public class MainProJFrame extends javax.swing.JFrame {
         btnOpenBr.setBorderPainted(false);
         btnOpenBr.setContentAreaFilled(false);
         btnOpenBr.setDefaultCapable(false);
+        btnOpenBr.setFocusPainted(false);
+        btnOpenBr.setFocusable(false);
         btnOpenBr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpenBrActionPerformed(evt);
-            }
-        });
-
-        btnAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Info.png"))); // NOI18N
-        btnAbout.setText("Thông tin ứng dụng");
-        btnAbout.setBorderPainted(false);
-        btnAbout.setContentAreaFilled(false);
-        btnAbout.setDefaultCapable(false);
-        btnAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAboutActionPerformed(evt);
             }
         });
 
@@ -1664,17 +1667,13 @@ public class MainProJFrame extends javax.swing.JFrame {
         pnlTrangThaiBottomLayout.setHorizontalGroup(
             pnlTrangThaiBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTrangThaiBottomLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(btnAbout)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnOpenBr, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnlTrangThaiBottomLayout.setVerticalGroup(
             pnlTrangThaiBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTrangThaiBottomLayout.createSequentialGroup()
-                .addGroup(pnlTrangThaiBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnOpenBr)
-                    .addComponent(btnAbout))
+                .addComponent(btnOpenBr)
                 .addGap(5, 5, 5))
         );
 
@@ -1688,8 +1687,8 @@ public class MainProJFrame extends javax.swing.JFrame {
                 .addGroup(pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlWapperLayout.createSequentialGroup()
                         .addComponent(pnlThanhTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlTrangThaiBottom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -1912,7 +1911,6 @@ public class MainProJFrame extends javax.swing.JFrame {
 
     private void pnlWapperNguoiHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlWapperNguoiHocMouseClicked
         // TODO add your handling code here:
-//        txtFindNguoiHoc.setText("");
     }//GEN-LAST:event_pnlWapperNguoiHocMouseClicked
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
@@ -2033,9 +2031,6 @@ public class MainProJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbout;
-    private javax.swing.JButton btnAbout1;
-    private javax.swing.JButton btnAbout2;
-    private javax.swing.JButton btnAbout3;
     private javax.swing.JButton btnChuyenDe;
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnExit;
@@ -2044,9 +2039,6 @@ public class MainProJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnNguoiHoc;
     private javax.swing.JButton btnNhanVien;
     private javax.swing.JButton btnOpenBr;
-    private javax.swing.JButton btnOpenBr1;
-    private javax.swing.JButton btnOpenBr2;
-    private javax.swing.JButton btnOpenBr3;
     private javax.swing.JButton btnThemChuyenDe;
     private javax.swing.JButton btnThemKhoaHoc;
     private javax.swing.JButton btnThemNguoiHoc;
@@ -2100,9 +2092,6 @@ public class MainProJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTongHopDiem;
     private javax.swing.JPanel pnlTrangChu;
     private javax.swing.JPanel pnlTrangThaiBottom;
-    private javax.swing.JPanel pnlTrangThaiBottom1;
-    private javax.swing.JPanel pnlTrangThaiBottom2;
-    private javax.swing.JPanel pnlTrangThaiBottom3;
     private javax.swing.JPanel pnlWapper;
     private javax.swing.JPanel pnlWapperChuyenDe;
     private javax.swing.JPanel pnlWapperKhoaHoc;

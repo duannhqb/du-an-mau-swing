@@ -50,14 +50,29 @@ public class AboutJDialog extends java.awt.Dialog {
 
         pnlWapper.setBackground(new java.awt.Color(255, 255, 255));
         pnlWapper.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlWapper.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlWapperMouseClicked(evt);
+            }
+        });
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logo-small.png"))); // NOI18N
+        lblIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIconMouseClicked(evt);
+            }
+        });
 
         txtGioiThieu.setEditable(false);
         txtGioiThieu.setBorder(null);
         txtGioiThieu.setText("Polypro là dự án mẫu. Mục tiêu chính là huấn luyện sinh viên quy trình thực hiện dự án.\n\nMục tiêu của dự án này là để rèn luyện kỹ năng IO (CDIO) tức không yêu cầu sinh viên\nphải thu thập phân tích mà chỉ thực hiện và vận hành một phần mềm chuẩn bị cho các \ndự án sau này. Các kỹ năng CD (trong CDIO) sẽ được huấn luyện ở dự án 1 và dự án 2.\n\nYêu cầu về môi trường: \n1. Hệ điều hành bất kỳ\n2. JDK 1.8 trở lên\n3. SQL Server 2008 trở lên");
         txtGioiThieu.setAutoscrolls(false);
+        txtGioiThieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtGioiThieuMouseClicked(evt);
+            }
+        });
         sp.setViewportView(txtGioiThieu);
 
         javax.swing.GroupLayout pnlWapperLayout = new javax.swing.GroupLayout(pnlWapper);
@@ -76,8 +91,8 @@ public class AboutJDialog extends java.awt.Dialog {
                 .addContainerGap()
                 .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -106,6 +121,21 @@ public class AboutJDialog extends java.awt.Dialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_formMouseClicked
+
+    private void lblIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIconMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_lblIconMouseClicked
+
+    private void pnlWapperMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlWapperMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_pnlWapperMouseClicked
+
+    private void txtGioiThieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGioiThieuMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_txtGioiThieuMouseClicked
 
     /**
      * @param args the command line arguments

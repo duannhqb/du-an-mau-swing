@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import model.HocVien;
 import model.NguoiHoc;
@@ -48,31 +49,8 @@ public class HocVienJFrame extends javax.swing.JFrame {
     void init() {
         setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
-
-//        model = new DefaultTableModel() {
-//            @Override
-//            public boolean isCellEditable(int rowIndex, int colIndex) {
-//                return (colIndex != 0) && (colIndex != 1) && (colIndex != 2);
-//            }
-//
-//            @Override
-//            public Class<?> getColumnClass(int column) {
-//                switch (column) {
-//                    case 0:
-//                        return String.class;
-//                    case 1:
-//                        return String.class;
-//                    case 2:
-//                        return String.class;
-//                    case 3:
-//                        return Double.class;
-//                    default:
-//                        return Boolean.class;
-//                }
-//            }
-//        };
-//        tblGridView.setModel(model);
         ShareHelper.DrawTable(tblGridView);
+        setBoderForTable(scpTable);
 
         ButtonGroup selectBtn = new ButtonGroup();
         selectBtn.add(rdoTatCa);
@@ -83,6 +61,11 @@ public class HocVienJFrame extends javax.swing.JFrame {
         this.fillComboBox();
         this.load();
         txtDiem.setText("-1");
+    }
+
+    void setBoderForTable(JScrollPane scp) {
+        scp.setViewportBorder(null);
+        scp.setBorder(null);
     }
 
     void fillComboBox() {
@@ -140,7 +123,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
             dao.insert(model);
             this.fillComboBox();
             this.load();
-//            DialogHelper.alert(this, "Thêm thành công!");
             ShareHelper.setInfinity(lblMSG, "Thêm thành công!");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi thêm học viên vào khóa học!");
@@ -169,7 +151,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
         }
         this.fillComboBox();
         this.load();
-//        DialogHelper.alert(this, "Cập nhật thành công!");
         ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
     }
 
@@ -182,7 +163,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        pmn = new javax.swing.JPopupMenu();
         mniThemHV = new javax.swing.JMenuItem();
         mniAnThanhThem = new javax.swing.JMenuItem();
         pnlWapper = new javax.swing.JPanel();
@@ -191,7 +172,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
         txtDiem = new javax.swing.JTextField();
         btnInsert = new javax.swing.JButton();
         pnlHVKH = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scpTable = new javax.swing.JScrollPane();
         tblGridView = new javax.swing.JTable();
         rdoTatCa = new javax.swing.JRadioButton();
         rdoDaNhap = new javax.swing.JRadioButton();
@@ -206,7 +187,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
                 mniThemHVActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(mniThemHV);
+        pmn.add(mniThemHV);
 
         mniAnThanhThem.setText("Ẩn thanh thêm học viên");
         mniAnThanhThem.addActionListener(new java.awt.event.ActionListener() {
@@ -214,21 +195,17 @@ public class HocVienJFrame extends javax.swing.JFrame {
                 mniAnThanhThemActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(mniAnThanhThem);
+        pmn.add(mniAnThanhThem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý học viên");
         setBackground(new java.awt.Color(255, 255, 255));
 
-        pnlWapper.setBackground(new java.awt.Color(255, 255, 255));
         pnlWapper.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 pnlWapperMouseReleased(evt);
             }
         });
-
-        pnlHVKhac.setBackground(new java.awt.Color(255, 255, 255));
-        pnlHVKhac.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         txtDiem.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDiem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -250,12 +227,12 @@ public class HocVienJFrame extends javax.swing.JFrame {
             pnlHVKhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHVKhacLayout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(cboNguoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboNguoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnInsert)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
         pnlHVKhacLayout.setVerticalGroup(
             pnlHVKhacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,14 +245,10 @@ public class HocVienJFrame extends javax.swing.JFrame {
             .addComponent(btnInsert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnlHVKH.setBackground(new java.awt.Color(255, 255, 255));
-        pnlHVKH.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
+        scpTable.setBackground(new java.awt.Color(255, 255, 255));
+        scpTable.setBorder(null);
 
         tblGridView.setAutoCreateRowSorter(true);
-        tblGridView.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         tblGridView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -300,7 +273,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
             }
         });
         tblGridView.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(tblGridView);
+        scpTable.setViewportView(tblGridView);
         if (tblGridView.getColumnModel().getColumnCount() > 0) {
             tblGridView.getColumnModel().getColumn(0).setPreferredWidth(25);
             tblGridView.getColumnModel().getColumn(1).setPreferredWidth(25);
@@ -309,7 +282,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
             tblGridView.getColumnModel().getColumn(4).setPreferredWidth(15);
         }
 
-        rdoTatCa.setBackground(new java.awt.Color(255, 255, 255));
         rdoTatCa.setText("Tất cả");
         rdoTatCa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,7 +289,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
             }
         });
 
-        rdoDaNhap.setBackground(new java.awt.Color(255, 255, 255));
         rdoDaNhap.setText("Đã nhập điểm");
         rdoDaNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +296,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
             }
         });
 
-        rdoChuaNhap.setBackground(new java.awt.Color(255, 255, 255));
         rdoChuaNhap.setText("Chưa nhập điểm");
         rdoChuaNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -350,31 +320,33 @@ public class HocVienJFrame extends javax.swing.JFrame {
             pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHVKHLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(pnlHVKHLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(rdoTatCa)
-                .addGap(35, 35, 35)
-                .addComponent(rdoDaNhap)
-                .addGap(29, 29, 29)
-                .addComponent(rdoChuaNhap)
-                .addGap(107, 107, 107)
-                .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlHVKHLayout.createSequentialGroup()
+                        .addComponent(rdoTatCa)
+                        .addGap(35, 35, 35)
+                        .addComponent(rdoDaNhap)
+                        .addGap(29, 29, 29)
+                        .addComponent(rdoChuaNhap)
+                        .addGap(117, 117, 117)
+                        .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scpTable, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlHVKHLayout.setVerticalGroup(
             pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlHVKHLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addComponent(scpTable, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlHVKHLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlHVKHLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(pnlHVKHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rdoTatCa)
                             .addComponent(rdoDaNhap)
                             .addComponent(rdoChuaNhap))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblTitleHVKH.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -387,15 +359,6 @@ public class HocVienJFrame extends javax.swing.JFrame {
         pnlWapper.setLayout(pnlWapperLayout);
         pnlWapperLayout.setHorizontalGroup(
             pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlWapperLayout.createSequentialGroup()
-                .addGroup(pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlWapperLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(pnlHVKhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlWapperLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(pnlHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlWapperLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,17 +368,26 @@ public class HocVienJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlWapperLayout.createSequentialGroup()
                         .addComponent(lblMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(170, 170, 170))))
+            .addGroup(pnlWapperLayout.createSequentialGroup()
+                .addGroup(pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlWapperLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(pnlHVKhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlWapperLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(pnlHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlWapperLayout.setVerticalGroup(
             pnlWapperLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlWapperLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblTitleHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(lblTitleHVKH, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlHVKhac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
                 .addComponent(lblMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(6, 6, 6)
                 .addComponent(pnlHVKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -470,14 +442,14 @@ public class HocVienJFrame extends javax.swing.JFrame {
     private void pnlWapperMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlWapperMouseReleased
         // TODO add your handling code here:
         if (evt.isPopupTrigger()) {
-            jPopupMenu1.show(this, evt.getX(), evt.getY());
+            pmn.show(this, evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_pnlWapperMouseReleased
 
     private void mniAnThanhThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAnThanhThemActionPerformed
         // TODO add your handling code here:
         pnlHVKhac.setVisible(false);
-        lblMSG.setVisible(true);
+//        lblMSG.setVisible(true);
     }//GEN-LAST:event_mniAnThanhThemActionPerformed
 
     /**
@@ -519,18 +491,18 @@ public class HocVienJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnInsert;
     private javax.swing.JComboBox<String> cboNguoiHoc;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMSG;
     private javax.swing.JLabel lblTitleHVKH;
     private javax.swing.JMenuItem mniAnThanhThem;
     private javax.swing.JMenuItem mniThemHV;
+    private javax.swing.JPopupMenu pmn;
     private javax.swing.JPanel pnlHVKH;
     private javax.swing.JPanel pnlHVKhac;
     private javax.swing.JPanel pnlWapper;
     private javax.swing.JRadioButton rdoChuaNhap;
     private javax.swing.JRadioButton rdoDaNhap;
     private javax.swing.JRadioButton rdoTatCa;
+    private javax.swing.JScrollPane scpTable;
     private javax.swing.JTable tblGridView;
     private javax.swing.JTextField txtDiem;
     // End of variables declaration//GEN-END:variables
