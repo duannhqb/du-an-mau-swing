@@ -77,7 +77,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         lblChao.setText("Chào: " + ShareHelper.USER.getHoTen());
         this.cardLayout(pnlTrangChu, pnlHome);
         this.popMenu();
-        
+
         ShareHelper.DrawTable(tblThongKeNguoiHoc);
         ShareHelper.DrawTable(tblBangDiem);
         ShareHelper.DrawTable(tblTongHop);
@@ -239,7 +239,6 @@ public class MainProJFrame extends javax.swing.JFrame {
     }
 
 // ******************* TAB khóa học *********************
-
     void loadKhoaHoc() {
         DefaultTableModel model = (DefaultTableModel) tblKhoaHoc.getModel();
         model.setRowCount(0);
@@ -338,7 +337,7 @@ public class MainProJFrame extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    
+
 //    bảng doanh thu
 //    với quyền truy cập là Trưởng phòng mới xem được doanh thu
 //    quyền nhân viên không thể xem được doanh thu
@@ -784,9 +783,10 @@ public class MainProJFrame extends javax.swing.JFrame {
             .addComponent(pnlNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnlNguoiHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnlDieuHuongLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDieuHuongLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAbout)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
         );
         pnlDieuHuongLayout.setVerticalGroup(
             pnlDieuHuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2046,7 +2046,7 @@ public class MainProJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnThongKe;
     private javax.swing.JComboBox<String> cboKhoaHoc;
     private javax.swing.JComboBox<String> cboNam;
-    private javax.swing.JLabel lblChao;
+    public static javax.swing.JLabel lblChao;
     private javax.swing.JLabel lblDongHo;
     private javax.swing.JLabel lblFindChuyenDe;
     private javax.swing.JLabel lblFindKhoaHoc;

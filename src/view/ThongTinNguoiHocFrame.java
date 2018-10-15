@@ -38,6 +38,7 @@ public class ThongTinNguoiHocFrame extends javax.swing.JFrame {
         this.index = index;
         initComponents();
         init();
+        this.fillToForm();
     }
 
     void init() {
@@ -47,7 +48,6 @@ public class ThongTinNguoiHocFrame extends javax.swing.JFrame {
         MainProJFrame.tblNguoiHoc.setDefaultEditor(Object.class, null);
         this.load();
         this.setStatus(true);
-        this.fillToForm();
     }
 
     void load() {
@@ -136,26 +136,143 @@ public class ThongTinNguoiHocFrame extends javax.swing.JFrame {
         setStatus(true);
     }
 
+    boolean checkID() {
+        if (txtMaNH.getText().length() == 7) {
+            if (dao.checkNH(txtMaNH.getText())) {
+                return true;
+            } else {
+                DialogHelper.alert(this, "Mã người học đã tồn tại !");
+            }
+        } else {
+            DialogHelper.alert(this, "Mã người học phải đúng 7 ký tự !");
+        }
+        return false;
+    }
+
+    boolean isCheck(int... args) {
+        boolean check = true, check1 = true;
+
+        if (args.length != 0) {
+            check = checkID();
+        }
+
+        if (!txtHoTen.getText().matches("^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ\" +\n"
+                + "            \"ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ\" +\n"
+                + "            \"ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s]+$")) {
+            check = false;
+            DialogHelper.alert(this, "Họ tên phải là ký tự alphabet và ký tự trắng !");
+        }
+
+        if (txtNgaySinh.getText().length() == 0) {
+            check = false;
+            DialogHelper.alert(this, "Bạn phải nhập ngày sinh !");
+        } else {
+            try {
+                if (txtNgaySinh.getText().length() == 10) {
+                    String nam = txtNgaySinh.getText().substring(6);
+                    String namHienTai = XDate.toString(XDate.now()).substring(6);
+                    if ((Integer.parseInt(namHienTai) - Integer.parseInt(nam)) <= 16) {
+                        check = false;
+                        DialogHelper.alert(this, "Bạn phải hơn 16 tuổi chứ ?");
+                    }
+                } else {
+                    DialogHelper.alert(this, "Bạn phải nhập đúng ngày tháng vd : " + XDate.toString(XDate.now()));
+                    check = false;
+                }
+            } catch (Exception e) {
+                check = false;
+            }
+        }
+
+        if (txtDienThoai.getText().length() != 0) {
+//            nếu insert truyền giá trị vào thì sẽ kiểm tra trùng nếu k truyền thì sẽ vào update
+//            nếu update thì sẽ kiểm tra nếu id và sđt đang có mà trùng với dữ liệu của người đang được truy vấn thì sẽ bỏ qua, nếu khác thì sẽ trùng
+            if (args.length != 0) {
+                if (!dao.checkSDT(txtDienThoai.getText())) {
+                    DialogHelper.alert(this, "Số điện thoại không được trùng !");
+                    check = false;
+                }
+            } else {
+                String maNH = (String) MainProJFrame.tblNguoiHoc.getValueAt(this.index, 0);
+                NguoiHoc nguoiHoc = dao.findById(maNH);
+                if (nguoiHoc.getMaNH().equals(txtMaNH.getText()) && nguoiHoc.getDienThoai().equals(txtDienThoai.getText())) {
+                    check1 = true;
+                } else {
+//                    nếu mà người đnag được chọn mà không đúng thì sẽ sai và sẽ kiểm tra những người còn lại nếu có ai có mã thì sẽ trả về false
+                    if (!dao.checkSDT(txtDienThoai.getText())) {
+                        DialogHelper.alert(this, "Số điện thoại không được trùng !");
+                        check = false;
+                        check1 = false;
+                    }
+                }
+            }
+
+            if (!txtDienThoai.getText().matches("\\d{10,11}")) {
+                DialogHelper.alert(this, "Số điện thoại 10 hoặc 11 số !");
+                check = false;
+            }
+
+        } else {
+            check = false;
+            DialogHelper.alert(this, "Không được rỗng số điện thoại !");
+        }
+
+        if (txtEmail.getText().contains("@")) {
+            if (args.length != 0) {
+                if (!dao.checkEmail(txtEmail.getText())) {
+                    DialogHelper.alert(this, "Email không được trùng !");
+                    check = false;
+                }
+            } else {
+                String maNH = (String) MainProJFrame.tblNguoiHoc.getValueAt(this.index, 0);
+                NguoiHoc nguoiHoc = dao.findById(maNH);
+                if (nguoiHoc.getMaNH().equals(txtMaNH.getText()) && nguoiHoc.getEmail().equals(txtEmail.getText())) {
+                    check1 = true;
+                } else {
+                    if (!dao.checkEmail(txtEmail.getText())) {
+                        DialogHelper.alert(this, "Email không được trùng !");
+                        check = false;
+                        check1 = false;
+                    }
+                }
+            }
+        } else {
+            check = false;
+            DialogHelper.alert(this, "Email phải có @");
+        }
+
+        if (txtGhiChu.getText().length() == 0) {
+            check = false;
+            DialogHelper.alert(this, "Không được để trống ghi chú");
+        }
+
+        return check && check1;
+    }
+
     void insert() {
-        NguoiHoc model = getModel();
-        try {
-            dao.insert(model);
-            this.load();
-            this.clear();
-            ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Thêm mới thất bại!");
+        if (isCheck(1)) {
+            NguoiHoc model = getModel();
+            try {
+                dao.insert(model);
+                this.load();
+                this.clear();
+                ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+            }
         }
     }
 
     void update() {
-        NguoiHoc model = getModel();
-        try {
-            dao.update(model);
-            this.load();
-            ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Cập nhật thất bại!");
+        if (isCheck()) {
+            NguoiHoc model = getModel();
+            try {
+                dao.update(model);
+                this.load();
+                ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+            }
         }
     }
 

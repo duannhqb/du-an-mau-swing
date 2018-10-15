@@ -32,6 +32,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
     Integer MaKH;
     HocVienDAO dao = new HocVienDAO();
     NguoiHocDAO nhdao = new NguoiHocDAO();
+    int diemIndex;
 
     public HocVienJFrame() {
         initComponents();
@@ -112,21 +113,32 @@ public class HocVienJFrame extends javax.swing.JFrame {
         }
     }
 
-    void insert() {
-        NguoiHoc nh = (NguoiHoc) cboNguoiHoc.getSelectedItem();
-        HocVien model = new HocVien();
-        model.setMaKH(MaKH);
-        model.setMaNH(nh.getMaNH());
-        model.setDiem(Double.valueOf(txtDiem.getText()));
+    boolean check() {
+        if (Double.parseDouble(txtDiem.getText()) >= 0 && Double.parseDouble(txtDiem.getText()) <= 10 || Double.parseDouble(txtDiem.getText()) == -1) {
+            return true;
+        } else {
+            DialogHelper.alert(this, "Điểm từ 0 đến 10 hoặc là -1 (chưa nhập)");
+        }
+        return false;
+    }
 
-        try {
-            dao.insert(model);
-            this.fillComboBox();
-            this.load();
-            ShareHelper.setInfinity(lblMSG, "Thêm thành công!");
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Lỗi thêm học viên vào khóa học!");
-            System.out.println(e.toString());
+    void insert() {
+        if (check()) {
+            NguoiHoc nh = (NguoiHoc) cboNguoiHoc.getSelectedItem();
+            HocVien model = new HocVien();
+            model.setMaKH(MaKH);
+            model.setMaNH(nh.getMaNH());
+            model.setDiem(Double.valueOf(txtDiem.getText()));
+
+            try {
+                dao.insert(model);
+                this.fillComboBox();
+                this.load();
+                ShareHelper.setInfinity(lblMSG, "Thêm thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Lỗi thêm học viên vào khóa học!");
+                System.out.println(e.toString());
+            }
         }
     }
 
@@ -140,13 +152,20 @@ public class HocVienJFrame extends javax.swing.JFrame {
             if (isDelete) {
                 dao.delete(maHV);
             } else {
-                HocVien model = new HocVien();
-                model.setMaHV(maHV);
-                model.setMaKH(MaKH);
-                model.setMaNH(maNH);
-                model.setDiem(diem);
+                txtDiem.setFocusable(true);
+                if (diem >= 0 && diem <= 10 || diem == -1) {
+                    HocVien model = new HocVien();
+                    model.setMaHV(maHV);
+                    model.setMaKH(MaKH);
+                    model.setMaNH(maNH);
+                    model.setDiem(diem);
 
-                dao.update(model);
+                    dao.update(model);
+                } else {
+                    DialogHelper.alert(this, "Điểm từ 0 - 10 hoặc là -1 (chưa nhập)");
+                    this.load();
+                    return;
+                }
             }
         }
         this.fillComboBox();
@@ -273,6 +292,11 @@ public class HocVienJFrame extends javax.swing.JFrame {
             }
         });
         tblGridView.setGridColor(new java.awt.Color(255, 255, 255));
+        tblGridView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblGridViewMouseClicked(evt);
+            }
+        });
         scpTable.setViewportView(tblGridView);
         if (tblGridView.getColumnModel().getColumnCount() > 0) {
             tblGridView.getColumnModel().getColumn(0).setPreferredWidth(25);
@@ -451,6 +475,11 @@ public class HocVienJFrame extends javax.swing.JFrame {
         pnlHVKhac.setVisible(false);
 //        lblMSG.setVisible(true);
     }//GEN-LAST:event_mniAnThanhThemActionPerformed
+
+    private void tblGridViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGridViewMouseClicked
+        // TODO add your handling code here:
+        diemIndex = tblGridView.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_tblGridViewMouseClicked
 
     /**
      * @param args the command line arguments

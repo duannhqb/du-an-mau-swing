@@ -179,7 +179,7 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
             KhoaHoc model = new KhoaHoc();
             model.setMaCD(cd.getMaCD());
             model.setMaNV(ShareHelper.USER.getMaNV());
-            model.setNgayKG(XDate.add(30));
+            model.setNgayKG(XDate.now());
             model.setNgayTao(XDate.now());
             this.setModel(model);
 
@@ -190,28 +190,42 @@ public class ThongTinKhoaHocJFrame extends javax.swing.JFrame {
         }
     }
 
+    boolean check() {
+        Date day = XDate.toDate(txtNgayKhaiGiang.getText());
+        Date dayOfNow = XDate.now();
+        if (day.after(dayOfNow)) {
+            return true;
+        }
+        DialogHelper.alert(this, "Ngày phải sau ngày hiện tại!");
+        return false;
+    }
+
     void insert() {
-        KhoaHoc model = getModel();
-        model.setNgayTao(new Date());
-        try {
-            dao.insert(model);
-            this.load();
-            this.clear();
-            ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
-        } catch (HeadlessException e) {
-            DialogHelper.alert(this, "Thêm mới thất bại!");
+        if (check()) {
+            KhoaHoc model = getModel();
+            model.setNgayTao(new Date());
+            try {
+                dao.insert(model);
+                this.load();
+                this.clear();
+                ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
+            } catch (HeadlessException e) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+            }
         }
     }
 
     void update() {
-        KhoaHoc model = getModel();
-        try {
-            dao.update(model);
-            this.load();
-            ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Cập nhật thất bại!");
-            System.out.println("error: " + e.toString());
+        if (check()) {
+            KhoaHoc model = getModel();
+            try {
+                dao.update(model);
+                this.load();
+                ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+                System.out.println("error: " + e.toString());
+            }
         }
     }
 

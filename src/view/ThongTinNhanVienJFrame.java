@@ -77,6 +77,42 @@ public class ThongTinNhanVienJFrame extends javax.swing.JFrame {
         this.setStatus(true);
     }
 
+    private boolean checkID() {
+        if (txtMaNV.getText().length() != 0) {
+            if (dao.checkID(txtMaNV.getText())) {
+                return true;
+            } else {
+                DialogHelper.alert(this, "Mã nhân viên đã tồn tại!");
+            }
+        } else {
+            DialogHelper.alert(this, "Mã nhân viên không được bỏ trống!");
+        }
+        return false;
+    }
+
+    private boolean isvalid(int... args) {
+        boolean check = true;
+
+//        nếu truyền vào tham số thì sẽ kiểm tra (chỉ truyền tham số khi dùng insert)
+        if (args.length != 0) {
+            check = checkID();
+        }
+
+        if (txtMatKhau.getPassword().length < 3) {
+            DialogHelper.alert(this, "Mật khẩu phải có ít nhất 3 kí tự !");
+            check = false;
+        }
+
+        if (!txtHoTen.getText().matches("^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ\" +\n"
+                + "            \"ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ\" +\n"
+                + "            \"ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\\\s]+$")) {
+            DialogHelper.alert(this, "Họ tên chỉ chứa alphabet và ký tự trắng !");
+            check = false;
+        }
+
+        return check;
+    }
+
     void setModel(NhanVien model) {
         txtMaNV.setText(model.getMaNV());
         txtHoTen.setText(model.getHoTen());
@@ -116,37 +152,46 @@ public class ThongTinNhanVienJFrame extends javax.swing.JFrame {
         NhanVien model = getModel();
 
         String confirm = new String(txtMatKhauXacNhan.getPassword());
-        if (confirm.equals(model.getMatKhau())) {
-            try {
-                dao.insert(model);
-                this.load();
-                this.clear();
-                ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
-            } catch (Exception e) {
-                DialogHelper.alert(this, "Thêm mới thất bại!");
+        if (isvalid(1)) {
+            if (confirm.equals(model.getMatKhau())) {
+                try {
+                    dao.insert(model);
+                    this.load();
+                    this.clear();
+                    ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
+                } catch (Exception e) {
+                    DialogHelper.alert(this, "Thêm mới thất bại!");
+                }
+            } else {
+                DialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
             }
-        } else {
-            DialogHelper.alert(this, "Xác nhận mật khẩu không đúng!");
         }
     }
 
     void update() {
         NhanVien model = getModel();
         String confirm = new String(txtMatKhauXacNhan.getPassword());
-        if (confirm.equals(model.getMatKhau())) {
-            try {
-                dao.update(model);
-                this.load();
-                ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
-            } catch (Exception e) {
-                DialogHelper.alert(this, "Cập nhật thất bại!");
+        if (isvalid()) {
+            if (confirm.equals(model.getMatKhau())) {
+                try {
+                    dao.update(model);
+                    this.load();
+                    ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
+
+                    if (ShareHelper.USER.getMaNV().equals(txtMaNV.getText())) {
+                        MainProJFrame.lblChao.setText("Chào: " + txtHoTen.getText());
+                    }
+                } catch (Exception e) {
+                    DialogHelper.alert(this, "Cập nhật thất bại!");
+                }
+            } else {
+                DialogHelper.alert(this, "Xác nhận mật khẩu không đúng");
             }
-        } else {
-            DialogHelper.alert(this, "Xác nhận mật khẩu không đúng");
         }
     }
 
     void delete() {
+
         if (DialogHelper.confirm(this, "Bạn thực sự muốn xóa nhân viên này!")) {
             String maNV = txtMaNV.getText();
             try {
@@ -170,6 +215,10 @@ public class ThongTinNhanVienJFrame extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi truy vẫn dữ liệu!");
+        }
+
+        if (txtMaNV.getText().equals(ShareHelper.USER.getMaNV())) {
+            this.btnDelete.setEnabled(false);
         }
     }
 

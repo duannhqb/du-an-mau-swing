@@ -97,4 +97,10 @@ public class ChuyenDeDAO {
         String sql = "SELECT * FROM ChuyenDe WHERE TenCD LIKE ?";
         return select(sql, "%" + keyword + "%");
     }
+    
+     public boolean checkCD(String MaCD) {
+        String sql = "SELECT * FROM ChuyenDe WHERE MaCD = ?";
+        List<ChuyenDe> list = select(sql, MaCD);
+        return list.isEmpty();
+    }
 }

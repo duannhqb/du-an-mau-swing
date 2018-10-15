@@ -48,10 +48,6 @@ public class NhanVienDAO {
 
     private NhanVien readFormResultSet(ResultSet rs) throws SQLException {
         NhanVien nhanVien = new NhanVien();
-//        nhanVien.setMaNV(rs.getString("MaNV"));
-//        nhanVien.setMatKhau(rs.getString("MatKhau"));
-//        nhanVien.setHoTen(rs.getString("HoTen"));
-//        nhanVien.setVaiTro(rs.getBoolean("VaiTro"));
         nhanVien.setMaNV(rs.getString(1));
         nhanVien.setMatKhau(rs.getString(2));
         nhanVien.setHoTen(rs.getString(3));
@@ -87,12 +83,18 @@ public class NhanVienDAO {
         String sql = "SELECT * FROM NhanVien WHERE HoTen LIKE ?";
         return select(sql, "%" + keyword + "%");
     }
-    
+
     public NhanVien findById(String maNV) {
         String sql = "SELECT * FROM NhanVien WHERE MaNV=?";
         List<NhanVien> list = select(sql, maNV);
 //      list được lưu giá trị từ select theo mã nhân viên
 //      nếu list.size lớn hơn 0 là đúng thì sẽ trả về vị trí đầu tiên trong list đó ( list.get(0) ) còn là sai thì sẽ return về null
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public boolean checkID(String maNV) {
+        String sql = "SELECT * FROM NhanVien WHERE MaNV LIKE ?";
+        List<NhanVien> list = select(sql, maNV);
+        return list.size() == 0;
     }
 }

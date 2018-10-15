@@ -31,8 +31,16 @@ public class DangNhapJDialog extends java.awt.Dialog {
         setIconImage(ShareHelper.APP_ICON);
         setLocationRelativeTo(null);
 
-        txtUserName.setText("DiuNT");
-        txtPassword.setText("123456");
+        txtUserName.setText("admin");
+        txtPassword.setText("admin");
+    }
+
+    public boolean isvalid() {
+        if (txtUserName.getText().length() == 0) {
+            DialogHelper.alert(this, "Vui lòng nhập tên đăng nhập!");
+            return false;
+        }
+        return true;
     }
 
     void login() {
@@ -248,7 +256,9 @@ public class DangNhapJDialog extends java.awt.Dialog {
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
         // TODO add your handling code here:
-        this.login();
+        if (this.isvalid()) {
+            this.login();
+        }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed

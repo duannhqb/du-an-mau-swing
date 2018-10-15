@@ -106,7 +106,7 @@ public class ShareHelper {
 
     public static void setInfinity(JLabel label, String text) {
         label.setVisible(true);
-        label.setForeground(Color.red);
+        label.setForeground(new Color(86,188,27));
         label.setFont(new Font("SansSerif", Font.BOLD, 13));
         label.setText(text);
 

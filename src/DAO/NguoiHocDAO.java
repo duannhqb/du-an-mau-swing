@@ -71,11 +71,29 @@ public class NguoiHocDAO {
         List<NguoiHoc> list = select(sql, manh);
         return list.size() > 0 ? list.get(0) : null;
     }
-    
+
     public NguoiHoc findByName(String ten) {
         String sql = "SELECT * FROM NguoiHoc WHERE HoTen=?";
         List<NguoiHoc> list = select(sql, ten);
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public boolean checkNH(String maNH) {
+        String sql = "SELECT * FROM NguoiHoc WHERE maNH = ?";
+        List<NguoiHoc> list = select(sql, maNH);
+        return list.isEmpty();
+    }
+
+    public boolean checkSDT(String sdt) {
+        String sql = "SELECT * FROM NguoiHoc WHERE DienThoai = ?";
+        List<NguoiHoc> list = select(sql, sdt);
+        return list.isEmpty();
+    }
+
+    public boolean checkEmail(String email) {
+        String sql = "SELECT * FROM NguoiHoc WHERE Email = ?";
+        List<NguoiHoc> list = select(sql, email);
+        return list.isEmpty();
     }
 
     private List<NguoiHoc> select(String sql, Object... args) {

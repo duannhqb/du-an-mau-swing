@@ -39,7 +39,6 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
     public ThongTinChuyenDeJFrame() {
         initComponents();
         init();
-        this.fillToForm();
         lblMSG.setVisible(false);
         try {
             this.clear();
@@ -72,7 +71,6 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
     }
 
     void load() {
-//        model = (DefaultTableModel) tblGridView.getModel();
         model = (DefaultTableModel) MainProJFrame.tblChuyenDe.getModel();
         model.setRowCount(0);
         try {
@@ -128,7 +126,6 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
         btnDelete.setEnabled(!insertTable);
 
         boolean first = this.index > 0;
-//        boolean last = this.index < tblGridView.getRowCount() - 1;
         boolean last = this.index < MainProJFrame.tblChuyenDe.getRowCount() - 1;
 
         btnFirst.setEnabled(!insertTable && first);
@@ -150,26 +147,105 @@ public class ThongTinChuyenDeJFrame extends javax.swing.JFrame {
         }
     }
 
-    void insert() {
-        ChuyenDe model = getModel();
+    boolean checkId() {
+        if (!dao.checkCD(txtMaCD.getText())) {
+            DialogHelper.alert(this, "Mã chuyên đề đã tồn tại!");
+            return false;
+        }
+        return true;
+    }
+
+    boolean isvalid(int... args) {
+
+        boolean check = true;
+
+        if (args.length != 0) {
+            check = checkId();
+        }
+
+        if (txtMaCD.getText().length() == 0) {
+            DialogHelper.alert(this, "Mã chuyên đề không được bỏ trống!");
+            check = false;
+        } else {
+            if (txtMaCD.getText().length() != 5) {
+                DialogHelper.alert(this, "Mã chuyên đề phải đúng 5 kí tự!");
+                check = false;
+            }
+        }
+
+        if (txtTenCD.getText().length() == 0) {
+            DialogHelper.alert(this, "Tên chuyên đề không được để trống!");
+            check = false;
+        }
+
         try {
-            dao.insert(model);
-            this.load();
-            this.clear();
-            ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
+            if (txtHocPhi.getText().length() == 0) {
+                DialogHelper.alert(this, "Học phí không được để trống!");
+                check = false;
+            } else {
+                if (Double.parseDouble(txtHocPhi.getText()) < 0) {
+                    DialogHelper.alert(this, "Học phí phải là số dương");
+                    check = false;
+                }
+            }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Thêm mới thất bại!");
+            DialogHelper.alert(this, "Học phí phải là số!");
+            check = false;
+        }
+
+        try {
+            if (txtThoiLuong.getText().length() == 0) {
+                DialogHelper.alert(this, "Thời lượng không được để trống!");
+                check = false;
+            } else {
+                if (Integer.parseInt(txtThoiLuong.getText()) < 0) {
+                    DialogHelper.alert(this, "Thời lượng phải là số dương");
+                    check = false;
+                }
+            }
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thời lượng phải là số");
+            check = false;
+        }
+
+        if (txtMoTa.getText().length() == 0) {
+            DialogHelper.alert(this, "Thông tin mô tả không được để trống!");
+            check = false;
+        }
+
+        if (lblHinh.getToolTipText().isEmpty()) {
+            DialogHelper.alert(this, "Hình không được để trống!");
+            check = false;
+        }
+
+        return check;
+
+    }
+
+    void insert() {
+        if (isvalid(1)) {
+            ChuyenDe model = getModel();
+            try {
+                dao.insert(model);
+                this.load();
+                this.clear();
+                ShareHelper.setInfinity(lblMSG, "Thêm mới thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Thêm mới thất bại!");
+            }
         }
     }
 
     void update() {
-        ChuyenDe model = getModel();
-        try {
-            dao.update(model);
-            this.load();
-            ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Cập nhật thất bại!");
+        if (isvalid()) {
+            ChuyenDe model = getModel();
+            try {
+                dao.update(model);
+                this.load();
+                ShareHelper.setInfinity(lblMSG, "Cập nhật thành công!");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại!");
+            }
         }
     }
 
